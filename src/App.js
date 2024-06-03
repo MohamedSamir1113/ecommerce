@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Layout from "./pages/Layout/Layout";
+import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
+import Products from "./components/Products/Products";
+import Cart from "./components/Cart/Cart";
+import Categories from "./components/Categories/Categories";
+import Notfound from "./pages/NotFound/Notfound";
+import Brands from "./components/Brands/Brands";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        {
+          index:true,
+          element: <ProtectedRoute><Home /></ProtectedRoute>,
+        },
+        {
+          path: "login",
+          element: <Login/>,
+        },
+        {
+          path: "register",
+          element: <Register/>,
+        },
+        {
+          path: "products",
+          element: <ProtectedRoute><Products /></ProtectedRoute>,
+        },
+        {
+          path: "cart",
+          element: <ProtectedRoute><Cart /></ProtectedRoute>,
+        },
+        {
+          path: "categories",
+          element: <ProtectedRoute><Categories /></ProtectedRoute>,
+        },
+        {
+          path: "brands",
+          element:<ProtectedRoute><Brands /></ProtectedRoute>,
+        },
+        {
+          path: "*",
+          element: <Notfound />,
+        },
+      ],
+    },
+  ]);
+  return <div className="App">
+    <RouterProvider router={router}/>
+  </div>;
 }
 
 export default App;
