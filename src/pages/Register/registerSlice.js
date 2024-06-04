@@ -4,6 +4,7 @@ const initialState = {
   loading: "idle",
   error: "",
   message: "",
+  user: {},
 };
 
 export const userRegister = createAsyncThunk(
@@ -36,7 +37,7 @@ const registerSlice = createSlice({
       })
       .addCase(userRegister.fulfilled, (state, action) => {
         state.loading = "idle";
-
+        state.user=action.payload.user
         state.message = action.payload.message;
       })
       .addCase(userRegister.rejected, (state, action) => {

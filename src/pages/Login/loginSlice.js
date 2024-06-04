@@ -31,6 +31,11 @@ export const userLogin = createAsyncThunk(
 const loginSlice = createSlice({
   name: "login",
   initialState,
+  reducers:{
+     resetMessage(state,action) {
+      state.message=""
+    }
+  },
   extraReducers: (builder) =>
     builder
       .addCase(userLogin.pending, (state, action) => {
@@ -48,3 +53,4 @@ const loginSlice = createSlice({
 
 export default loginSlice.reducer;
 
+export const {resetMessage} = loginSlice.actions

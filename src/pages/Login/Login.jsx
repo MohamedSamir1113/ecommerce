@@ -4,31 +4,36 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate } from "react-router";
-import { userLogin } from "./loginSlice";
-
+import { resetMessage, userLogin } from "./loginSlice";
 
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const message = useSelector((store) => store.loginReducer.message);
+
   const token = useSelector((store) => store.loginReducer.token);
-  
+
   function submitLogin(values) {
     dispatch(userLogin(values));
   }
 
   useEffect(() => {
     if (message === "success") {
-        localStorage.setItem('userToken',token)
+      localStorage.setItem("userToken", token);
+      
+      dispatch(resetMessage());
       navigate("/");
     }
-  }, [message, navigate,token]);
+  }, [message, navigate, token, dispatch]);
 
   useEffect(() => {
     // Load token from local storage and update the state
-    const storedToken = localStorage.getItem('userToken');
+    const storedToken = localStorage.getItem("userToken");
     if (storedToken) {
-      dispatch({ type: 'login/loginUser/fulfilled', payload: { token: storedToken } });
+      dispatch({
+        type: "login/loginUser/fulfilled",
+        payload: { token: storedToken },
+      });
     }
   }, [dispatch]);
   const validationSchema = Yup.object({
@@ -54,7 +59,6 @@ function Login() {
     <div className="w-75 mx-auto p-5">
       <h3>Login Now</h3>
       <form onSubmit={formik.handleSubmit}>
-        
         <div>
           <label htmlFor="email">Email</label>
           <input
@@ -85,7 +89,8 @@ function Login() {
             <div className="text-danger">{formik.errors.password}</div>
           ) : null}
         </div>
-        
+
+        {message && <div className="alert alert-danger">{message}</div>}
 
         <button type="submit" className="btn bg-main mt-4 text-white">
           Login
