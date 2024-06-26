@@ -11,10 +11,12 @@ function Navbar() {
   const storedToken = localStorage.getItem('userToken');
 const navigate=useNavigate()
   
-function logOut() {
+const logOut = (event) => {
+  event.preventDefault();
   localStorage.removeItem('userToken');
-  navigate("/login");
-}
+  navigate("/login")
+  
+  };
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -72,7 +74,7 @@ function logOut() {
               </>
             )}
             {storedToken&&<li className="nav-item">
-              <Link className="nav-link" onClick={()=>logOut()}>Logout</Link>
+              <Link className="nav-link" onClick={(e)=>logOut(e)}>Logout</Link>
             </li>}
           </ul>
         </div>
