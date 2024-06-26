@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { userRegister } from "./registerSlice";
 import { useNavigate } from "react-router";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -13,6 +14,9 @@ function Register() {
   function submitRegister(values) {
     dispatch(userRegister(values));
   }
+
+  const [passwordType, setPasswordType] = useState("password");
+  const [repasswordType, setRepasswordType] = useState("password");
 
   useEffect(() => {
     if (message === "success") {
@@ -102,30 +106,63 @@ function Register() {
         </div>
         <div>
           <label htmlFor="password">Password</label>
-          <input
-            className="form-control mt-2"
-            type="password"
-            onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
-            value={formik.values.password}
-            name="password"
-            id="password"
-          />
+          <div className="d-flex position-relative">
+            <input
+              className="form-control mt-2"
+              type={passwordType}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.password}
+              name="password"
+              id="password"
+            />
+            <FontAwesomeIcon
+              className="position-absolute end-0 pe-4  translate-middle-y"
+              icon={faEye}
+              onClick={() =>
+                passwordType === "password"
+                  ? setPasswordType("text")
+                  : setPasswordType("password")
+              }
+              style={{
+                backgroundColor: "transparent",
+                top: "55%",
+                cursor: "pointer",
+              }}
+            />
+          </div>
+
           {formik.touched.password && formik.errors.password ? (
             <div className="text-danger">{formik.errors.password}</div>
           ) : null}
         </div>
         <div>
           <label htmlFor="rePassword">Re-enter Password</label>
-          <input
-            className="form-control mt-2"
-            type="password"
-            onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
-            value={formik.values.rePassword}
-            name="rePassword"
-            id="rePassword"
-          />
+          <div className="d-flex position-relative">
+            <input
+              className="form-control mt-2"
+              type={repasswordType}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.rePassword}
+              name="rePassword"
+              id="rePassword"
+            />
+            <FontAwesomeIcon
+              className="position-absolute end-0 pe-4  translate-middle-y"
+              icon={faEye}
+              onClick={() =>
+                repasswordType === "password"
+                  ? setRepasswordType("text")
+                  : setRepasswordType("password")
+              }
+              style={{
+                backgroundColor: "transparent",
+                top: "55%",
+                cursor: "pointer",
+              }}
+            />
+          </div>
           {formik.touched.rePassword && formik.errors.rePassword ? (
             <div className="text-danger">{formik.errors.rePassword}</div>
           ) : null}

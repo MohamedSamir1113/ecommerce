@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router";
 import { resetMessage, userLogin } from "./loginSlice";
 
@@ -12,7 +13,7 @@ function Login() {
   const message = useSelector((store) => store.loginReducer.message);
 
   const token = useSelector((store) => store.loginReducer.token);
-
+  const [passwordType, setPasswordType] = useState("password");
   function submitLogin(values) {
     dispatch(userLogin(values));
   }
@@ -20,7 +21,7 @@ function Login() {
   useEffect(() => {
     if (message === "success") {
       localStorage.setItem("userToken", token);
-      
+
       dispatch(resetMessage());
       navigate("/");
     }
@@ -76,15 +77,32 @@ function Login() {
         </div>
         <div>
           <label htmlFor="password">Password</label>
-          <input
-            className="form-control mt-2"
-            type="password"
-            onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
-            value={formik.values.password}
-            name="password"
-            id="password"
-          />
+          <div className="position-relative">
+            <input
+              className="form-control mt-2"
+              type={passwordType}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.password}
+              name="password"
+              id="password"
+            />
+
+            <FontAwesomeIcon
+              className="position-absolute end-0 pe-4  translate-middle-y"
+              icon={faEye}
+              onClick={() =>
+                passwordType === "password"
+                  ? setPasswordType("text")
+                  : setPasswordType("password")
+              }
+              style={{
+                backgroundColor: "transparent",
+                top: "55%",
+                cursor: "pointer",
+              }}
+            />
+          </div>
           {formik.touched.password && formik.errors.password ? (
             <div className="text-danger">{formik.errors.password}</div>
           ) : null}
