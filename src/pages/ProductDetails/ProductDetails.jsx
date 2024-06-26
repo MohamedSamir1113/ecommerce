@@ -29,7 +29,7 @@ function ProductDetails() {
     [id]
   );
 
-  const { imageCover, title, description, price, ratingsAverage } =productDetails;
+  const { imageCover, title, description, price, ratingsAverage ,category} =productDetails;
   return (
     <div>
       {isLoading ? (
@@ -49,7 +49,7 @@ function ProductDetails() {
              <div>
              <h5>{title}</h5>
               <p className="text-muted py-3">{description}</p>
-              {/* <span className="bg-warning mb-4 px-4">{}</span> */}
+              <span className="bg-warning mb-4 px-4">{category?.name}</span>
               <div className="d-flex justify-content-between px-4">
                <span>{price} L.E</span>
                <span>
