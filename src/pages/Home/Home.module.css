@@ -1,0 +1,31 @@
+/* StyledCarousel.css */
+
+.carouselControlPrevCustom,
+.carouselControlNextCustom {
+  top: 50%; /* Adjust the top position as needed */
+  transform: translateY(-50%);
+  width: auto;
+  height: auto;
+  z-index: 1; /* Ensure arrows are above the carousel items */
+}
+
+.carouselControlPrevCustom {
+  left: 20px; /* Adjust left position for previous arrow */
+}
+
+.carouselControlNextCustom {
+  right: 20px; /* Adjust right position for next arrow */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  /* Optional: Customize the arrow icons if needed */
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  /* Optional: Additional styling for arrows */
+  width: 40px; /* Adjust arrow size */
+  height: 40px;
+}

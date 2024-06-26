@@ -9,6 +9,7 @@ import Categories from "./components/Categories/Categories";
 import Notfound from "./pages/NotFound/Notfound";
 import Brands from "./components/Brands/Brands";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ProductDetails from "./pages/ProductDetails/ProductDetails";
 
 function App() {
   const router = createBrowserRouter([
@@ -43,6 +44,10 @@ function App() {
         {
           path: "brands",
           element:<ProtectedRoute><Brands /></ProtectedRoute>,
+        },
+        {
+          path: "product-details/:id",
+          element:<ProtectedRoute><ProductDetails/></ProtectedRoute>,
         },
         {
           path: "*",
