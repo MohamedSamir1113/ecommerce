@@ -1,0 +1,22 @@
+.card {
+    border: 1px solid transparent; 
+    transition: all 0.4s; 
+    margin: 2px !important; 
+    box-sizing: border-box; 
+    padding: 15px;
+  }
+
+  .cartBtn
+  {
+    display: none !important;
+    transition: all 0.4s; 
+    margin: auto;
+  }
+
+  .card:hover .cartBtn{
+    display: inline-block !important;
+  }
+  .card:hover{
+    border: 1px solid green;
+  }
+  

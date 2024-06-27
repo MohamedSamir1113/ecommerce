@@ -6,16 +6,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router";
 import { resetMessage, userLogin } from "./loginSlice";
+import Spinner from "../../components/Spinner";
 
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const message = useSelector((store) => store.loginReducer.message);
-
+  const loading = useSelector((store) => store.loginReducer.loading);
+  const [btnContent,setbtnContent]=useState("Login")
   const token = useSelector((store) => store.loginReducer.token);
   const [passwordType, setPasswordType] = useState("password");
   function submitLogin(values) {
     dispatch(userLogin(values));
+   if(loading ==="idle")
+    {
+      setbtnContent(<Spinner/>)
+    }
   }
 
   useEffect(() => {
@@ -113,7 +119,7 @@ function Login() {
         {message && <div className="alert alert-danger">{message}</div>}
 
         <button type="submit" className="btn bg-main mt-4 text-white">
-          Login
+        {btnContent}
         </button>
       </form>
     </div>

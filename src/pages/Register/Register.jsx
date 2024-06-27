@@ -6,23 +6,31 @@ import { userRegister } from "./registerSlice";
 import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import Spinner from "../../components/Spinner";
 function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const message = useSelector((store) => store.registerReducer.message);
-
-  function submitRegister(values) {
-    dispatch(userRegister(values));
-  }
-
+  const loading =useSelector((store)=>store.registerReducer.loading);
   const [passwordType, setPasswordType] = useState("password");
   const [repasswordType, setRepasswordType] = useState("password");
-
+  const [btnContent,setbtnContent]=useState("Register")
   useEffect(() => {
     if (message === "success") {
       navigate("/login",{ replace: true });
     }
   }, [message, navigate]);
+ 
+
+  function submitRegister(values) {
+    dispatch(userRegister(values));
+    if(loading ==="idle")
+      {
+        setbtnContent(<Spinner/>)
+      }
+  }
+
+  
 
   const validationSchema = Yup.object({
     name: Yup.string()
@@ -169,7 +177,7 @@ function Register() {
         </div>
 
         <button type="submit" className="btn bg-main mt-4 text-white">
-          Register
+         {btnContent}
         </button>
       </form>
     </div>
