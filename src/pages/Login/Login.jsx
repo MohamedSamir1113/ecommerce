@@ -23,7 +23,7 @@ function Login() {
       localStorage.setItem("userToken", token);
 
       dispatch(resetMessage());
-      navigate("/");
+      navigate("/", { replace: true });
     }
   }, [message, navigate, token, dispatch]);
 
@@ -35,8 +35,10 @@ function Login() {
         type: "login/loginUser/fulfilled",
         payload: { token: storedToken },
       });
+      navigate("/", { replace: true });
     }
-  }, [dispatch]);
+  }, [dispatch,navigate]);
+  
   const validationSchema = Yup.object({
     email: Yup.string()
       .email("Invalid email address")

@@ -20,7 +20,7 @@ function Register() {
 
   useEffect(() => {
     if (message === "success") {
-      navigate("/login");
+      navigate("/login",{ replace: true });
     }
   }, [message, navigate]);
 

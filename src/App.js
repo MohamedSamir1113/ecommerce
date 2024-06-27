@@ -31,19 +31,19 @@ function App() {
         },
         {
           path: "products",
-          element: <ProtectedRoute><Products /></ProtectedRoute>,
+          element: <ProtectedRoute><Products/></ProtectedRoute>,
         },
         {
           path: "cart",
-          element: <ProtectedRoute><Cart /></ProtectedRoute>,
+          element: <ProtectedRoute><Cart/></ProtectedRoute>,
         },
         {
           path: "categories",
-          element: <ProtectedRoute><Categories /></ProtectedRoute>,
+          element: <ProtectedRoute><Categories/></ProtectedRoute>,
         },
         {
           path: "brands",
-          element:<ProtectedRoute><Brands /></ProtectedRoute>,
+          element:<ProtectedRoute><Brands/></ProtectedRoute>,
         },
         {
           path: "product-details/:id",
@@ -51,7 +51,7 @@ function App() {
         },
         {
           path: "*",
-          element: <Notfound />,
+          element: <Notfound/>,
         },
       ],
     },
