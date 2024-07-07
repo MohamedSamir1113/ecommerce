@@ -11,7 +11,7 @@ function FeaturedProducts() {
   }
 
   let { isLoading, data } = useQuery("feturedProducts", getFeturedProducts);
-  console.log(data?.data);
+
 
   // useEffect(function () {
   //   async function getAllProducts() {
