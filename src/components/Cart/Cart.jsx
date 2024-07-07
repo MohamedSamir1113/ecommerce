@@ -4,11 +4,12 @@ function Cart() {
   const cart = useSelector((store) => store.cartReducer.cart);
   const cartProducts = cart.products || []; // handle undefined cart properly
 
-  console.log(cartProducts);
+  
 
   return (
     <div>
-      {cartProducts.length > 0 ? (
+      {cartProducts.length > 0 ? 
+      (
         <ul>
           {cartProducts.map((product, index) => (
             <li key={index}>
@@ -16,7 +17,8 @@ function Cart() {
             </li>
           ))}
         </ul>
-      ) : (
+      ) : 
+      (
         <p>No products in the cart</p>
       )}
     </div>

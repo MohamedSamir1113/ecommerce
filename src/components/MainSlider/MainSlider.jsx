@@ -1,4 +1,3 @@
-import styles from "./MainSlider.module.css";
 import img1 from "../../assets/images/slider-image-1.jpeg";
 import img2 from "../../assets/images/slider-image-2.jpeg";
 import img3 from "../../assets/images/slider-image-3.jpeg";

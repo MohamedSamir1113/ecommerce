@@ -31,6 +31,7 @@ function CategorySlider() {
     return data;
   }
   const { data } = useQuery("categories", getCategories);
+  
   //   const settings = {
   //     dots: true,
   //     dotsClass: "slick-dots slick-thumb",
@@ -82,14 +83,15 @@ function CategorySlider() {
     <div className="container">
       <Slider {...settings}>
         {data?.data.map((item) => (
-          <Link key={item._id}>
+          <div key={item._id}>
             <img
               src={item.image}
               height="300px"
               className="w-100"
               alt={item.name}
             />
-          </Link>
+            <p className="text-center">{item.name}</p>
+          </div>
         ))}
       </Slider>
     </div>

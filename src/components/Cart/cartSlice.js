@@ -12,7 +12,6 @@ export const addProductToCart = createAsyncThunk(
   "cart/addToCart",
   async function (productId, thunkAPI) {
     const token = thunkAPI.getState().loginReducer.token;
-    
     try {
       const response = await axios.post(
         `https://ecommerce.routemisr.com/api/v1/cart`,
@@ -23,12 +22,28 @@ export const addProductToCart = createAsyncThunk(
           },
         }
       );
-      return response.data; 
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
+export const getUserCart = createAsyncThunk("cart/getCart", async function (_,thunkAPI) {
+  const token = thunkAPI.getState().loginReducer.token;
+    try {
+      const response = await axios.get(
+        `https://ecommerce.routemisr.com/api/v1/cart`,
+        {
+          headers: {
+            token: token,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+});
 
 const cartSlice = createSlice({
   name: "cart",
@@ -40,10 +55,23 @@ const cartSlice = createSlice({
       })
       .addCase(addProductToCart.fulfilled, (state, action) => {
         state.loading = "idle";
-        state.cart = action.payload.data; // assuming response structure has 'data' key
+        state.cart = action.payload.data;
         state.message = action.payload.message;
       })
       .addCase(addProductToCart.rejected, (state, action) => {
+        state.loading = "idle";
+        state.error = action.payload || action.error.message;
+      })
+      .addCase(getUserCart.pending, (state) => {
+        state.loading = "loading";
+      })
+      .addCase(getUserCart.fulfilled, (state, action) => {
+        state.loading = "idle";
+        state.cart = action.payload.data;
+        console.log(action.payload.data);
+        state.message = action.payload.message;
+      })
+      .addCase(getUserCart.rejected, (state, action) => {
         state.loading = "idle";
         state.error = action.payload || action.error.message;
       }),
