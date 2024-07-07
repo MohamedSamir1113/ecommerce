@@ -67,7 +67,7 @@ function Login() {
   });
 
   return (
-    <div className="w-75 mx-auto p-5">
+    <div className="w-md-75 mx-auto p-5">
       <h3>Login Now</h3>
       <form onSubmit={formik.handleSubmit}>
         <div>
