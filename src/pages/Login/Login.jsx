@@ -16,22 +16,18 @@ function Login() {
   const [btnContent, setbtnContent] = useState("Login");
   const token = useSelector((store) => store.loginReducer.token);
   const [passwordType, setPasswordType] = useState("password");
+
   function submitLogin(values) {
     dispatch(userLogin(values));
-    if (loading === "idle") {
-      
-      if (message === "Incorrect email or password") {
-        setbtnContent("Login");
-      }
-      else{
-        setbtnContent(<Spinner />);
-      }
-    }
+    setbtnContent(<Spinner />);
   }
 
   useEffect(() => {
     if (loading === "idle") {
-      if (message === "Incorrect email or password" || message === "Login failed. Please try again.") {
+      if (
+        message === "Incorrect email or password" ||
+        message === "Login failed. Please try again."
+      ) {
         setbtnContent("Login");
       } else if (message === "success") {
         localStorage.setItem("userToken", token);
@@ -42,7 +38,6 @@ function Login() {
   }, [loading, message, navigate, token, dispatch]);
 
   useEffect(() => {
-
     const storedToken = localStorage.getItem("userToken");
     if (storedToken) {
       dispatch({
@@ -57,7 +52,6 @@ function Login() {
     email: Yup.string()
       .email("Invalid email address")
       .required("Email is required"),
-
     password: Yup.string()
       .min(6, "Password must be at least 6 characters")
       .required("Password is required"),
@@ -103,9 +97,8 @@ function Login() {
               name="password"
               id="password"
             />
-
             <FontAwesomeIcon
-              className="position-absolute end-0 pe-4  translate-middle-y"
+              className="position-absolute end-0 pe-4 translate-middle-y"
               icon={faEye}
               onClick={() =>
                 passwordType === "password"

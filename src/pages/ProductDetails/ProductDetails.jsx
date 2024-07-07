@@ -12,7 +12,7 @@ function ProductDetails() {
   const [isLoading, setIsLoading] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(true);
   const dispatch = useDispatch();
-const message = useSelector(store=>store.cartReducer.message)
+  const message = useSelector((store) => store.cartReducer.message);
   useEffect(() => {
     async function getProductDetails() {
       try {
@@ -48,8 +48,6 @@ const message = useSelector(store=>store.cartReducer.message)
     console.log(message);
   }
 
-  
-  
   return (
     <div>
       {isLoading ? (
@@ -130,7 +128,10 @@ const message = useSelector(store=>store.cartReducer.message)
                     />
                   </span>
                 </div>
-                <button onClick={()=>handleAddToCart(id)} className="btn btn-success mt-2 w-100">
+                <button
+                  onClick={() => handleAddToCart(id)}
+                  className="btn btn-success mt-2 w-100"
+                >
                   + add to cart
                 </button>
               </div>
