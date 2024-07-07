@@ -13,14 +13,19 @@ function Login() {
   const navigate = useNavigate();
   const message = useSelector((store) => store.loginReducer.message);
   const loading = useSelector((store) => store.loginReducer.loading);
-  const [btnContent,setbtnContent]=useState("Login")
+  const [btnContent, setbtnContent] = useState("Login");
   const token = useSelector((store) => store.loginReducer.token);
   const [passwordType, setPasswordType] = useState("password");
   function submitLogin(values) {
     dispatch(userLogin(values));
-   if(loading ==="idle")
-    {
-      setbtnContent(<Spinner/>)
+    if (loading === "idle") {
+      
+      if (message === "Incorrect email or password") {
+        setbtnContent("Login");
+      }
+      else{
+        setbtnContent(<Spinner />);
+      }
     }
   }
 
@@ -34,7 +39,7 @@ function Login() {
   }, [message, navigate, token, dispatch]);
 
   useEffect(() => {
-    // Load token from local storage and update the state
+
     const storedToken = localStorage.getItem("userToken");
     if (storedToken) {
       dispatch({
@@ -43,8 +48,8 @@ function Login() {
       });
       navigate("/", { replace: true });
     }
-  }, [dispatch,navigate]);
-  
+  }, [dispatch, navigate]);
+
   const validationSchema = Yup.object({
     email: Yup.string()
       .email("Invalid email address")
@@ -119,7 +124,7 @@ function Login() {
         {message && <div className="alert alert-danger">{message}</div>}
 
         <button type="submit" className="btn bg-main mt-4 text-white">
-        {btnContent}
+          {btnContent}
         </button>
       </form>
     </div>

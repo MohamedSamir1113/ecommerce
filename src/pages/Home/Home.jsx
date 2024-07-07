@@ -1,5 +1,5 @@
 import CategorySlider from "../../components/CategorySlider/CategorySlider";
-import FeatuedProducts from "../../components/FeaturedProducts/FeatuedProducts";
+import FeaturedProducts from "../../components/FeaturedProducts/FeaturedProducts";
 import MainSlider from "../../components/MainSlider/MainSlider";
 
 function Home() {
@@ -7,7 +7,7 @@ function Home() {
     <>
       <MainSlider />
       <CategorySlider />
-      <FeatuedProducts />
+      <FeaturedProducts />
     </>
   );
 }

@@ -1,7 +1,7 @@
-import ProductItem from "../../components/ProductItem/ProductItem";
+import ProductItem from "../ProductItem/ProductItem";
 import { useQuery } from "react-query";
-import Spinner from "../../components/Spinner";
-function FeatuedProducts() {
+import Spinner from "../Spinner";
+function FeaturedProducts() {
   // const [products, setProducts] = useState([]);
   // const [isLoading, setIsLoading] = useState(false);
   async function getFeturedProducts() {
@@ -58,4 +58,4 @@ function FeatuedProducts() {
   );
 }
 
-export default FeatuedProducts;
+export default FeaturedProducts;
