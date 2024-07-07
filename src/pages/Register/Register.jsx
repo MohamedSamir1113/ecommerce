@@ -16,18 +16,22 @@ function Register() {
   const [repasswordType, setRepasswordType] = useState("password");
   const [btnContent,setbtnContent]=useState("Register")
   useEffect(() => {
-    if (message === "success") {
-      navigate("/login",{ replace: true });
+    if (loading === "idle") {
+      if (
+        message === "Incorrect email or password" ||
+        message === "Account Already Exists"
+      ) {
+        setbtnContent("Register");
+      } else if (message === "success") {
+        navigate("/login",{ replace: true });
+      }
     }
-  }, [message, navigate]);
+  }, [message, navigate,loading]);
  
 
   function submitRegister(values) {
     dispatch(userRegister(values));
-    if(loading ==="idle")
-      {
-        setbtnContent(<Spinner/>)
-      }
+    setbtnContent(<Spinner />);
   }
 
   
@@ -175,10 +179,12 @@ function Register() {
             <div className="text-danger">{formik.errors.rePassword}</div>
           ) : null}
         </div>
-
+        {message && <div className="alert alert-danger mt-2">{message}</div>}
         <button type="submit" className="btn bg-main mt-4 text-white">
          {btnContent}
         </button>
+
+        
       </form>
     </div>
   );

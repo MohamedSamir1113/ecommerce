@@ -41,8 +41,10 @@ const registerSlice = createSlice({
         state.message = action.payload.message;
       })
       .addCase(userRegister.rejected, (state, action) => {
+        state.loading = "idle";
         state.error = action.error.message;
-      }),
+        state.message = "Login failed. Please try again.";
+      })
 });
 
 export default registerSlice.reducer;
