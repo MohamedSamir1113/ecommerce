@@ -1,13 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    loading: "idle",
-    message: "",
-    error: "",
-    token: localStorage.getItem('userToken') || ""
-  };
-  
-  
+  loading: "idle",
+  message: "",
+  error: "",
+  token: localStorage.getItem("userToken") || "",
+};
+
 export const userLogin = createAsyncThunk(
   "login/loginUser",
   async function (User, thunkAPI) {
@@ -24,17 +23,17 @@ export const userLogin = createAsyncThunk(
     const data = await res.json();
     console.log(data);
 
-    return data
+    return data;
   }
 );
 
 const loginSlice = createSlice({
   name: "login",
   initialState,
-  reducers:{
-     resetMessage(state,action) {
-      state.message=""
-    }
+  reducers: {
+    resetMessage(state, action) {
+      state.message = "";
+    },
   },
   extraReducers: (builder) =>
     builder
@@ -43,14 +42,16 @@ const loginSlice = createSlice({
       })
       .addCase(userLogin.fulfilled, (state, action) => {
         state.loading = "idle";
-        state.message=action.payload.message
-        state.token = action.payload.token; 
+        state.message = action.payload.message;
+        state.token = action.payload.token;
       })
       .addCase(userLogin.rejected, (state, action) => {
+        state.loading = "idle";
         state.error = action.error.message;
+        state.message = "Login failed. Please try again.";
       }),
 });
 
 export default loginSlice.reducer;
 
-export const {resetMessage} = loginSlice.actions
+export const { resetMessage } = loginSlice.actions;

@@ -30,13 +30,16 @@ function Login() {
   }
 
   useEffect(() => {
-    if (message === "success") {
-      localStorage.setItem("userToken", token);
-
-      dispatch(resetMessage());
-      navigate("/", { replace: true });
+    if (loading === "idle") {
+      if (message === "Incorrect email or password" || message === "Login failed. Please try again.") {
+        setbtnContent("Login");
+      } else if (message === "success") {
+        localStorage.setItem("userToken", token);
+        dispatch(resetMessage());
+        navigate("/", { replace: true });
+      }
     }
-  }, [message, navigate, token, dispatch]);
+  }, [loading, message, navigate, token, dispatch]);
 
   useEffect(() => {
 
