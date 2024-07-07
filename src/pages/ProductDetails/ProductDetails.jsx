@@ -12,7 +12,7 @@ function ProductDetails() {
   const [isLoading, setIsLoading] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(true);
   const dispatch = useDispatch();
-  const message = useSelector((store) => store.cartReducer.message);
+const message = useSelector(store=>store.cartReducer.message)
   useEffect(() => {
     async function getProductDetails() {
       try {
@@ -48,6 +48,8 @@ function ProductDetails() {
     console.log(message);
   }
 
+  
+  
   return (
     <div>
       {isLoading ? (
@@ -113,7 +115,7 @@ function ProductDetails() {
                 {/* Add more images as needed */}
               </Slider>
             </div>
-            <div className="col-md-7">
+            <div className="col-md-7 mt-md-0 mt-5">
               <div>
                 <h5>{title}</h5>
                 <p className="text-muted py-3">{description}</p>
@@ -128,10 +130,7 @@ function ProductDetails() {
                     />
                   </span>
                 </div>
-                <button
-                  onClick={() => handleAddToCart(id)}
-                  className="btn btn-success mt-2 w-100"
-                >
+                <button onClick={()=>handleAddToCart(id)} className="btn btn-success mt-2 w-100">
                   + add to cart
                 </button>
               </div>
