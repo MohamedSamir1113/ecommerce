@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
+
 import Slider from "react-slick";
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
