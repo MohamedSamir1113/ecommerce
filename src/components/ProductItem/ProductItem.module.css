@@ -1,6 +1,6 @@
 .card {
     border: 1px solid transparent; 
-    transition: all 0.4s; 
+    transition: all 0.7s; 
     margin: 2px !important; 
     box-sizing: border-box; 
     padding: 15px;
@@ -8,13 +8,13 @@
 
   .cartBtn
   {
-    display: none !important;
-    transition: all 0.4s; 
+    opacity: 0 !important;
+    transition: opacity 0.7s !important; 
     margin: auto;
   }
 
   .card:hover .cartBtn{
-    display: inline-block !important;
+    opacity: 1 !important;
   }
   .card:hover{
     border: 1px solid green;
