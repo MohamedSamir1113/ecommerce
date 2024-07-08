@@ -43,13 +43,8 @@ function ProductDetails() {
     slidesToScroll: 1,
   };
 
-  async function handleAddToCart(id) {
-    try {
-      const result = await dispatch(addProductToCart(id));
-      toast.success(result.payload.message);
-    } catch (error) {
-      toast.error(error.message || "Error adding item to cart");
-    }
+  function handleAddToCart(id) {
+    dispatch(addProductToCart(id));
   }
 
   return (
