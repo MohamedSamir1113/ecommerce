@@ -8,7 +8,7 @@ function Brands() {
         return response.data
     }
 
-    const{data,isLoading}=useQuery("getBrands",getBrands);
+    const{data}=useQuery("getBrands",getBrands);
     console.log(data?.data);
     return (
         <div>
