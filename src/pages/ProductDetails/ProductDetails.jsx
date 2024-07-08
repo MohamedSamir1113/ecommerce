@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import toast from 'react-hot-toast';
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
@@ -12,7 +13,8 @@ function ProductDetails() {
   const [isLoading, setIsLoading] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(true);
   const dispatch = useDispatch();
-const message = useSelector(store=>store.cartReducer.message)
+const message = useSelector(store=>store.cartReducer.message);
+const status = useSelector(store=>store.cartReducer.status);
   useEffect(() => {
     async function getProductDetails() {
       try {
@@ -32,8 +34,7 @@ const message = useSelector(store=>store.cartReducer.message)
     getProductDetails();
   }, [id]);
 
-  const { title, description, price, ratingsAverage, category, images } =
-    productDetails;
+  const { title, description, price, ratingsAverage, category, images } = productDetails;
   const settings = {
     dots: true,
     dotsClass: "slick-dots slick-thumb",
@@ -45,9 +46,16 @@ const message = useSelector(store=>store.cartReducer.message)
 
   function handleAddToCart(productId) {
     dispatch(addProductToCart(productId));
-    console.log(message);
+    if(status==="success")
+    {
+      toast.success(message);
+    }
+    else{
+      toast.error("error adding item to cart");
+    }
+    
   }
-
+  
   
   
   return (

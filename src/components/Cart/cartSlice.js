@@ -6,12 +6,14 @@ const initialState = {
   loading: "idle",
   message: "",
   error: "",
+  status:""
 };
 
 export const addProductToCart = createAsyncThunk(
   "cart/addToCart",
   async function (productId, thunkAPI) {
-    const token = thunkAPI.getState().loginReducer.token;
+    //const token = thunkAPI.getState().loginReducer.token;
+    const token = localStorage.getItem('userToken');
     try {
       const response = await axios.post(
         `https://ecommerce.routemisr.com/api/v1/cart`,
@@ -29,7 +31,8 @@ export const addProductToCart = createAsyncThunk(
   }
 );
 export const getUserCart = createAsyncThunk("cart/getCart", async function (_,thunkAPI) {
-  const token = thunkAPI.getState().loginReducer.token;
+  //const token = thunkAPI.getState().loginReducer.token;
+  const token = localStorage.getItem('userToken');
     try {
       const response = await axios.get(
         `https://ecommerce.routemisr.com/api/v1/cart`,
@@ -57,19 +60,23 @@ const cartSlice = createSlice({
         state.loading = "idle";
         state.cart = action.payload.data;
         state.message = action.payload.message;
+        state.status=action.payload.status
       })
       .addCase(addProductToCart.rejected, (state, action) => {
         state.loading = "idle";
         state.error = action.payload || action.error.message;
       })
+      
+      
+      
       .addCase(getUserCart.pending, (state) => {
         state.loading = "loading";
       })
       .addCase(getUserCart.fulfilled, (state, action) => {
         state.loading = "idle";
         state.cart = action.payload.data;
-        console.log(action.payload.data);
         state.message = action.payload.message;
+       
       })
       .addCase(getUserCart.rejected, (state, action) => {
         state.loading = "idle";
