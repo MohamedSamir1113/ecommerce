@@ -1,25 +1,40 @@
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCart } from "./cartSlice";
 
 function Cart() {
-  const cart = useSelector((store) => store.cartReducer.cart);
-  const cartProducts = cart.products || []; // handle undefined cart properly
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cartReducer.cart);
+  const loading = useSelector((state) => state.cartReducer.loading);
+  const error = useSelector((state) => state.cartReducer.error);
 
-  
+  console.log(cart.products);
+
+  useEffect(() => {
+    dispatch(fetchCart());
+  }, [dispatch]);
+
+  if (loading === "loading") {
+    return <div className=" vh-100 d-flex justify-content-center align-items-center">Loading...</div>
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div>
-      {cartProducts.length > 0 ? 
-      (
+      <h1>Cart</h1>
+      {cart.products && cart.products.length > 0 ? (
         <ul>
-          {cartProducts.map((product, index) => (
-            <li key={index}>
-              Product ID: {product.product}, Count: {product.count}, Price: {product.price}
+          {cart.products.map((item) => (
+            <li key={item._id}>
+              {item.product.title} 
             </li>
           ))}
         </ul>
-      ) : 
-      (
-        <p>No products in the cart</p>
+      ) : (
+        <div>Your cart is empty</div>
       )}
     </div>
   );
