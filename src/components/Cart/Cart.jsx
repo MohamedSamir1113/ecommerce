@@ -29,7 +29,7 @@ function Cart() {
         <ul>
           {cart.products.map((item) => (
             <li key={item._id}>
-              {item.product.title} 
+              {item.product.title}- <span style={{color:"red",fontSize:"30px"}}>{item.count}</span>
             </li>
           ))}
         </ul>
