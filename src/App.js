@@ -11,6 +11,7 @@ import Notfound from "./pages/NotFound/Notfound";
 import Brands from "./components/Brands/Brands";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   const router = createBrowserRouter([
@@ -49,6 +50,10 @@ function App() {
         {
           path: "product-details/:id",
           element:<ProtectedRoute><ProductDetails/></ProtectedRoute>,
+        },
+        {
+          path: "profile",
+          element:<ProtectedRoute><Profile/></ProtectedRoute>,
         },
         {
           path: "*",

@@ -1,10 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addProductToCart } from "../../components/Cart/cartSlice";
 
 function ProductDetails() {
@@ -13,8 +13,6 @@ function ProductDetails() {
   const [isLoading, setIsLoading] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(true);
   const dispatch = useDispatch();
-const message = useSelector(store=>store.cartReducer.message);
-const status = useSelector(store=>store.cartReducer.status);
   useEffect(() => {
     async function getProductDetails() {
       try {
@@ -34,7 +32,8 @@ const status = useSelector(store=>store.cartReducer.status);
     getProductDetails();
   }, [id]);
 
-  const { title, description, price, ratingsAverage, category, images } = productDetails;
+  const { title, description, price, ratingsAverage, category, images } =
+    productDetails;
   const settings = {
     dots: true,
     dotsClass: "slick-dots slick-thumb",
@@ -44,20 +43,15 @@ const status = useSelector(store=>store.cartReducer.status);
     slidesToScroll: 1,
   };
 
-  function handleAddToCart(productId) {
-    dispatch(addProductToCart(productId));
-    if(status==="success")
-    {
-      toast.success(message);
+  async function handleAddToCart(id) {
+    try {
+      const result = await dispatch(addProductToCart(id));
+      toast.success(result.payload.message);
+    } catch (error) {
+      toast.error(error.message || "Error adding item to cart");
     }
-    else{
-      toast.error("error adding item to cart");
-    }
-    
   }
-  
-  
-  
+
   return (
     <div>
       {isLoading ? (
@@ -138,7 +132,10 @@ const status = useSelector(store=>store.cartReducer.status);
                     />
                   </span>
                 </div>
-                <button onClick={()=>handleAddToCart(id)} className="btn btn-success mt-2 w-100">
+                <button
+                  onClick={() => handleAddToCart(id)}
+                  className="btn btn-success mt-2 w-100"
+                >
                   + add to cart
                 </button>
               </div>

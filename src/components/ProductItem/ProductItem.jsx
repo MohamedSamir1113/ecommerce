@@ -3,7 +3,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import styles from "./ProductItem.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addProductToCart } from "../Cart/cartSlice";
 function ProductItem({ product }) {
   const {
@@ -16,17 +16,16 @@ function ProductItem({ product }) {
   } = product;
   const mainTitle = title.split(" ").splice(0, 2).join(" ");
   const dispatch = useDispatch();
-  const message = useSelector((store) => store.cartReducer.message);
-  const status = useSelector((store) => store.cartReducer.status);
   
-  function handleAddToCart(e,id) {
+  async function handleAddToCart(e, id) {
     e.stopPropagation();
     e.preventDefault();
-    dispatch(addProductToCart(id));
-    if (status === "success") {
-      toast.success(message);
-    } else {
-      toast.error("error adding item to cart");
+
+    try {
+      const result = await dispatch(addProductToCart(id));
+      toast.success(result.payload.message);
+    } catch (error) {
+      toast.error(error.message || "Error adding item to cart");
     }
   }
 

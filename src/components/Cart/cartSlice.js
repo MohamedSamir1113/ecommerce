@@ -30,23 +30,23 @@ export const addProductToCart = createAsyncThunk(
     }
   }
 );
-export const getUserCart = createAsyncThunk("cart/getCart", async function (_,thunkAPI) {
-  //const token = thunkAPI.getState().loginReducer.token;
-  const token = localStorage.getItem('userToken');
-    try {
-      const response = await axios.get(
-        `https://ecommerce.routemisr.com/api/v1/cart`,
-        {
-          headers: {
-            token: token,
-          },
-        }
-      );
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data);
-    }
-});
+// export const getUserCart = createAsyncThunk("cart/getCart", async function (_,thunkAPI) {
+//   //const token = thunkAPI.getState().loginReducer.token;
+//   const token = localStorage.getItem('userToken');
+//     try {
+//       const response = await axios.get(
+//         `https://ecommerce.routemisr.com/api/v1/cart`,
+//         {
+//           headers: {
+//             token: token,
+//           },
+//         }
+//       );
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.response.data);
+//     }
+// });
 
 const cartSlice = createSlice({
   name: "cart",
@@ -69,19 +69,19 @@ const cartSlice = createSlice({
       
       
       
-      .addCase(getUserCart.pending, (state) => {
-        state.loading = "loading";
-      })
-      .addCase(getUserCart.fulfilled, (state, action) => {
-        state.loading = "idle";
-        state.cart = action.payload.data;
-        state.message = action.payload.message;
+      // .addCase(getUserCart.pending, (state) => {
+      //   state.loading = "loading";
+      // })
+      // .addCase(getUserCart.fulfilled, (state, action) => {
+      //   state.loading = "idle";
+      //   state.cart = action.payload.data;
+      //   state.message = action.payload.message;
        
-      })
-      .addCase(getUserCart.rejected, (state, action) => {
-        state.loading = "idle";
-        state.error = action.payload || action.error.message;
-      }),
+      // })
+      // .addCase(getUserCart.rejected, (state, action) => {
+      //   state.loading = "idle";
+      //   state.error = action.payload || action.error.message;
+      // }),
 });
 
 export default cartSlice.reducer;

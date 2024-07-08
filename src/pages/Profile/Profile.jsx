@@ -1,10 +1,8 @@
+import { useSelector } from "react-redux";
+
 function Profile() {
-    return (
-        <div>
-            Profile
-             
-        </div>
-    )
+
+  return <div>Profile</div>;
 }
 
-export default Profile
+export default Profile;

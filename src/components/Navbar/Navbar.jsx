@@ -4,15 +4,17 @@ import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faTiktok } from "@fortawesome/free-brands-svg-icons";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../assets/images/freshcart-logo.svg";
+import { useSelector } from "react-redux";
 
 function Navbar() {
-  const storedToken = localStorage.getItem('userToken');
+  const storedToken = localStorage.getItem("userToken");
   const navigate = useNavigate();
-  
+ 
   const logOut = (event) => {
     event.preventDefault();
-    localStorage.removeItem('userToken');
+    localStorage.removeItem("userToken");
     navigate("/login");
   };
 
@@ -60,7 +62,8 @@ function Navbar() {
               </>
             )}
           </ul>
-          <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+          <ul className="navbar-nav ms-auto mb-2 mb-lg-0 pe-5">
+         
             <li className="nav-item d-flex align-items-center">
               <FontAwesomeIcon className="pe-4" icon={faFacebook} />
               <FontAwesomeIcon className="pe-4" icon={faTiktok} />
@@ -82,10 +85,33 @@ function Navbar() {
               </>
             )}
             {storedToken && (
-              <li className="nav-item">
-                <Link className="nav-link" onClick={(e) => logOut(e)}>
-                  Logout
+              <li className="nav-item dropdown pe-4">
+                <Link
+                  className="nav-link dropdown-toggle d-flex justify-content-md-center align-items-center"
+                  to="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <FontAwesomeIcon icon={faUser} className="pe-2" />
+                 Modi
                 </Link>
+                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li>
+                    <Link className="dropdown-item" to="/profile">
+                      Profile
+                    </Link>
+                  </li>
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  <li>
+                    <Link className="nav-link" onClick={(e) => logOut(e)}>
+                      Logout
+                    </Link>
+                  </li>
+                </ul>
               </li>
             )}
           </ul>

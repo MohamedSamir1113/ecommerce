@@ -35,7 +35,7 @@ function FeaturedProducts() {
 
   return (
     <>
-      <div className="container mt-5">
+      <div className="container my-5">
         {isLoading ? (
           <div
             className="d-flex justify-content-center align-items-center"
