@@ -7,28 +7,10 @@ const initialState = {
   message: "",
   error: "",
   status: "",
+  numOfItems:0
 };
 
 // Fetch cart data
-export const fetchCart = createAsyncThunk(
-  "cart/fetchCart",
-  async function (_, thunkAPI) {
-    const token = localStorage.getItem("userToken");
-    try {
-      const response = await axios.get(
-        `https://ecommerce.routemisr.com/api/v1/cart`,
-        {
-          headers: {
-            token: token,
-          },
-        }
-      );
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data);
-    }
-  }
-);
 
 export const addProductToCart = createAsyncThunk(
   "cart/addToCart",
@@ -50,7 +32,25 @@ export const addProductToCart = createAsyncThunk(
     }
   }
 );
-
+export const fetchCart = createAsyncThunk(
+  "cart/fetchCart",
+  async function (_, thunkAPI) {
+    const token = localStorage.getItem("userToken");
+    try {
+      const response = await axios.get(
+        `https://ecommerce.routemisr.com/api/v1/cart`,
+        {
+          headers: {
+            token: token,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
 const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -79,6 +79,7 @@ const cartSlice = createSlice({
         state.cart = action.payload.data;
         state.message = action.payload.message;
         state.status = action.payload.status;
+        state.numOfItems=action.payload.numOfCartItems
       })
       .addCase(fetchCart.rejected, (state, action) => {
         state.loading = "idle";

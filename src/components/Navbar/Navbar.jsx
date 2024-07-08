@@ -5,13 +5,15 @@ import { faTiktok } from "@fortawesome/free-brands-svg-icons";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../assets/images/freshcart-logo.svg";
+import { useSelector } from "react-redux";
 
 
 function Navbar() {
   const storedToken = localStorage.getItem("userToken");
   const navigate = useNavigate();
- 
+ const numOfItems = useSelector(store=>store.cartReducer.numOfItems)
   const logOut = (event) => {
     event.preventDefault();
     localStorage.removeItem("userToken");
@@ -57,6 +59,12 @@ function Navbar() {
                 <li className="nav-item">
                   <Link className="nav-link" to="/cart">
                     Cart
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link position-relative" to="/cart">
+                  <FontAwesomeIcon style={{color:"green"}} icon={faCartShopping} />
+                  <div className="position-absolute" style={{top:"0px",right:"0px",fontWeight:"bolder",zIndex:"99"}}>{numOfItems}</div>
                   </Link>
                 </li>
               </>
