@@ -1,10 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 import styles from "./ProductItem.module.css";
 import { useDispatch } from "react-redux";
 import { addProductToCart } from "../Cart/cartSlice";
-
 function ProductItem({ product }) {
   const {
     imageCover,
@@ -17,10 +17,16 @@ function ProductItem({ product }) {
   const mainTitle = title.split(" ").splice(0, 2).join(" ");
   const dispatch = useDispatch();
 
-  function handleAddToCart(e, id) {
+  async function handleAddToCart(e, id) {
     e.stopPropagation();
     e.preventDefault();
-    dispatch(addProductToCart(id));
+
+    try {
+      const result = dispatch(addProductToCart(id));
+      toast.success(result.payload.message);
+    } catch (error) {
+      toast.error("Error adding item to cart");
+    }
   }
 
   return (

@@ -43,8 +43,13 @@ function ProductDetails() {
     slidesToScroll: 1,
   };
 
-  function handleAddToCart(id) {
-    dispatch(addProductToCart(id));
+  async function handleAddToCart(id) {
+    try {
+      const result = dispatch(addProductToCart(id));
+      toast.success(result.payload.message);
+    } catch (error) {
+      toast.error( "Error adding item to cart");
+    }
   }
 
   return (
