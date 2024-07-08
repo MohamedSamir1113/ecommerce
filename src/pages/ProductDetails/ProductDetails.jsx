@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { useDispatch } from "react-redux";
 import { addProductToCart } from "../../components/Cart/cartSlice";
+import { Spinner } from "react-bootstrap";
 
 function ProductDetails() {
   const { id } = useParams(); // Receive the params from the URL
@@ -59,7 +60,7 @@ function ProductDetails() {
           className="d-flex justify-content-center align-items-center"
           style={{ height: "100vh" }}
         >
-          <p>Loading...</p>
+          <Spinner/>
         </div>
       ) : (
         <>

@@ -26,7 +26,7 @@ function ProductItem({ product }) {
     <>
       <Link className={`p-0 m-0 col-md-2`} style={{ textDecoration: "none", color: "black" }} to={`/product-details/${id}`}>
         <div className={`m-2 ${styles.card}`}>
-          <img className="w-100" src={imageCover} alt="" />
+          <img className="w-100" src={imageCover} alt={name} />
           <div className=" mt-2">
             <span className="bg-warning">{name}</span>
             <p>{mainTitle}</p>
