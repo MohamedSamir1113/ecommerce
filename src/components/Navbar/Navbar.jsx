@@ -6,7 +6,7 @@ import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../assets/images/freshcart-logo.svg";
-import { useSelector } from "react-redux";
+
 
 function Navbar() {
   const storedToken = localStorage.getItem("userToken");
