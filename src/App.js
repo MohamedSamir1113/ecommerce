@@ -56,9 +56,11 @@ function App() {
       ],
     },
   ]);
-  return <div className="App">
+  return (
+  <div className="App">
     <RouterProvider router={router}/>
-  </div>;
+  </div>
+  );
 }
 
 export default App;
