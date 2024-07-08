@@ -56,11 +56,11 @@ function Navbar() {
                     Categories
                   </Link>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <Link className="nav-link" to="/cart">
                     Cart
                   </Link>
-                </li>
+                </li> */}
                 <li className="nav-item">
                   <Link className="nav-link position-relative" to="/cart">
                   <FontAwesomeIcon style={{color:"green"}} icon={faCartShopping} />
