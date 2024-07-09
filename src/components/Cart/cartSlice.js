@@ -7,7 +7,8 @@ const initialState = {
   message: "",
   error: "",
   status: "",
-  numOfItems:0
+  numOfItems:0,
+  totalCartPrice:0
 };
 
 // Fetch cart data
@@ -82,6 +83,7 @@ const cartSlice = createSlice({
         state.message = action.payload.message;
         state.status = action.payload.status;
         state.numOfItems=action.payload.numOfCartItems
+        state.totalCartPrice=action.payload.data.totalCartPrice
       })
       .addCase(fetchCart.rejected, (state, action) => {
         state.loading = "idle";
