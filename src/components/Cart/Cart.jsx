@@ -24,13 +24,20 @@ function Cart() {
 
   return (
     <div>
-      <h1>Cart</h1>
+      <h1>Cart:</h1>
       {cart.products && cart.products.length > 0 ? (
-        <ul>
-          {cart.products.map((item) => (
+        <ul className="mb-3">
+          {cart.products.map((item) => (<>
             <li key={item._id}>
               {item.product.title}- <span style={{color:"red",fontSize:"30px"}}>{item.count}</span>
             </li>
+            <li>
+               <img src={item.product.imageCover} alt="" />
+            </li>
+            <li>
+              {item.price} L.E
+            </li>
+            </>
           ))}
         </ul>
       ) : (

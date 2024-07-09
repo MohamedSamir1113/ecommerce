@@ -7,19 +7,26 @@ import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../assets/images/freshcart-logo.svg";
-import { useSelector } from "react-redux";//
+import { useDispatch, useSelector } from "react-redux";//
+import { useEffect } from "react";
+import { fetchCart } from "../Cart/cartSlice";
 
 
 function Navbar() {
   const storedToken = localStorage.getItem("userToken");
   const navigate = useNavigate();
+  const dispatch = useDispatch()
  const numOfItems = useSelector(store=>store.cartReducer.numOfItems)
   const logOut = (event) => {
     event.preventDefault();
     localStorage.removeItem("userToken");
     navigate("/login");
   };
-
+  useEffect(() => {
+    if (storedToken) {
+      dispatch(fetchCart());
+    }
+  }, [dispatch, storedToken]);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">

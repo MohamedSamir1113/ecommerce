@@ -71,6 +71,8 @@ const cartSlice = createSlice({
         state.error = action.payload || action.error.message;
       })
 
+      
+      
       .addCase(fetchCart.pending, (state) => {
         state.loading = "loading";
       })
