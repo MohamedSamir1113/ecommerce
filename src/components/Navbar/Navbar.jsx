@@ -7,7 +7,7 @@ import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../assets/images/freshcart-logo.svg";
-import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";//
 
 
 function Navbar() {
